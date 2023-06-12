@@ -2,6 +2,11 @@ import RPi.GPIO as GPIO
 from hx711 import HX711
 import getpass
 import smtplib
+import os
+
+# Look for your absolute directory path
+absolute_path = os.path.dirname(os.path.abspath(__file__))
+file_path = absolute_path + '/credentials.txt'
 
 
 GPIO.setmode(GPIO.BCM)
@@ -25,6 +30,7 @@ hx.set_scale_ratio(ratio)
 
 treshold_weight = 250
 
+
 while True:
 #    data = hx.get_raw_data_mean()
     weight = hx.get_weight_mean()
@@ -41,7 +47,7 @@ while True:
 
         PASSWORD = ""
         #### Reading password to access the Outlook email
-        with open('credentials.txt', 'r') as file:
+        with open(file_path, 'r') as file:
             PASSWORD = file.readline().strip()
         
         MESSAGE = """Subject: Mail sent using python
