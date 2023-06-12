@@ -1,0 +1,8 @@
+# requirements.txt
+# This file specifies the Python libraries required for the project.
+
+# HX711 library for interfacing with the HX711 load cell amplifier
+hx711
+
+# RPi.GPIO library for Raspberry Pi GPIO (General Purpose Input/Output) operations
+RPi.GPIO

@@ -21,13 +21,14 @@ ratio = reading/value
 
 hx.set_scale_ratio(ratio)
 
+treshold_weight = 250
 
 while True:
 #    data = hx.get_raw_data_mean()
     weight = hx.get_weight_mean()
     print(weight)
     
-    if weight <250:
+    if weight < treshold_weight:
         print('Low inventory')
 
         HOST = "smtp-mail.outlook.com"
@@ -36,12 +37,16 @@ while True:
         FROM_EMAIL = "shelves-status@outlook.com"
         TO_EMIAL = "jatr160397@gmail.com"
 
-        PASSWORD = getpass.getpass("Enter password: ")
+        PASSWORD = ""
+        #### Reading password to access the Outlook email
+        with open('credentials.txt', 'r') as file:
+            PASSWORD = file.readline().strip()
+        
         MESSAGE = """Subject: Mail sent using python
 Hi there ,
 This is the status of all the balance with the last generation equipment
 
-the weight of total inventory is """ + str(weight) + "g  " + """
+the weight of total inventory is """ + str(round(weight,2)) + "g  " + """
 
 thanks,
 test account"""
