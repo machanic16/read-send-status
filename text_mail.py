@@ -11,13 +11,15 @@ hx = HX711(dout_pin=6,
         )
 
 hx.zero()
-input('Place know weigt on scale & press Enter:')
-reading = hx.get_data_mean(readings=100)
+#input('Place know weigt on scale & press Enter:')
+#reading = hx.get_data_mean(readings=100)
 
-known_weight_grams = input('Enter the know weight in grams & press Enter: ')
-value = float(known_weight_grams)
+#known_weight_grams = input('Enter the know weight in grams & press Enter: ')
+#value = float(known_weight_grams)
 
-ratio = reading/value
+#ratio = reading/value
+
+ratio = 24.96 # this was calculated with the commented line above
 
 hx.set_scale_ratio(ratio)
 
