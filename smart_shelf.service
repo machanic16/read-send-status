@@ -1,0 +1,14 @@
+[Unit]
+Description=Smart Shelf Software
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/python3 /home/raspberry-pi/Documents/read-send-status/text_mail.py
+WorkingDirectory=/home/raspberry-pi/Documents/read-send-status
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+User=
+
+[Install]
+WantedBy=default.target
