@@ -1,8 +1,7 @@
-# requirements.txt
-# This file specifies the Python libraries required for the project.
-
-# HX711 library for interfacing with the HX711 load cell amplifier
-hx711
-
-# RPi.GPIO library for Raspberry Pi GPIO (General Purpose Input/Output) operations
-RPi.GPIO
+certifi==2023.7.22
+charset-normalizer==3.3.0
+HX711 @ git+https://github.com/gandalf15/HX711.git@a2b72a0b44fc200112ecb25e11b60a5ee4ba7d56#subdirectory=HX711_Python3
+idna==3.4
+requests==2.31.0
+RPi.GPIO==0.7.1
+urllib3==2.0.6
