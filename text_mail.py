@@ -47,7 +47,7 @@ while True:
 
         PASSWORD = ""
         #### Reading password to access the Outlook email
-        with open(file_path, 'r') as file:
+        with open('credentials.txt', 'r') as file:
             PASSWORD = file.readline().strip()
         
         MESSAGE = """Subject: Mail sent using python
