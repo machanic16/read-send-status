@@ -39,7 +39,7 @@ while True:
     if weight < treshold_weight:
         print('Low inventory')
 
-        data= {
+        update_data= {
                 "vals": { 
                     "name": "Updated from Rasberry PI",
                     "status" : "needs_refill"
@@ -47,14 +47,14 @@ while True:
                 "pk":4
                 }
 
-        response = requests.post(url,data)
+        response = requests.post(url,json=update_data)
         if response.status_code == 200:
             print([response.text,"it's all good man"])
         else :
             print(f"Requests failed with status code: {response.status_code}")
     else:
         print('Good level of inventory')
-        data= {
+        update_data= {
                 "vals": { 
                     "name": "Updated from Rasberry PI-",
                     "status" : "good"
@@ -62,7 +62,7 @@ while True:
                 "pk":4
                 }         
 
-        response = requests.post(url,data)
+        response = requests.post(url,json=update_data)
         if response.status_code == 200:
             print([response.text,"it's all good man"])
         else :
