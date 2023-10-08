@@ -28,7 +28,7 @@ ratio = 24.96 # this was calculated with the commented line above
 
 hx.set_scale_ratio(ratio)
 
-treshold_weight = 250
+weight_to_measure = 1000
 
 
 while True:
@@ -36,13 +36,13 @@ while True:
     weight = hx.get_weight_mean()
     print(weight)
     
-    if weight < treshold_weight:
-        print('Low inventory')
+    if weight > weight_to_measure*0.85 :
+        print('full inventory')
 
         update_data= {
                 "vals": { 
-                    "name": "Updated from Rasberry PI",
-                    "status" : "needs_refill"
+                    "name": "9Y",
+                    "status" : "full"
                     },
                 "pk":4
                 }
@@ -52,11 +52,13 @@ while True:
             print([response.text,"it's all good man"])
         else :
             print(f"Requests failed with status code: {response.status_code}")
-    else:
+        continue
+
+    if weight > weight_to_measure*0.65 :
         print('Good level of inventory')
         update_data= {
                 "vals": { 
-                    "name": "Updated from Rasberry PI-",
+                    "name": "9Y",
                     "status" : "good"
                     },
                 "pk":4
@@ -67,6 +69,40 @@ while True:
             print([response.text,"it's all good man"])
         else :
             print(f"Requests failed with status code: {response.status_code}")
+        continue
 
 
+    if weight > weight_to_measure*0.40:
+        print('needs to be checked')
+        update_data= {
+                "vals": { 
+                    "name": "9Y",
+                    "status" : "needs_refill"
+                    },
+                "pk":4
+                }         
+
+        response = requests.post(url,json=update_data)
+        if response.status_code == 200:
+            print([response.text,"it's all good man"])
+        else :
+            print(f"Requests failed with status code: {response.status_code}")
+        continue
+
+    print('empty')
+    update_data= {
+                "vals": { 
+                    "name": "9Y",
+                    "status" : "empty"
+                    },
+                "pk":4
+                }         
+
+    response = requests.post(url,json=update_data)
+    if response.status_code == 200:
+        print([response.text,"it's all good man"])
+    else :
+        print(f"Requests failed with status code: {response.status_code}")
+    
+   
 
